@@ -26,7 +26,7 @@
     "url": "https://github.com/parcelLab/edi-iftmin/issues"
   },
   "homepage": "https://github.com/parcelLab/edi-iftmin#readme",
-  "devDependencies": {
+  "dependencies": {
     "js-yaml": "^3.5.5",
     "underscore": "^1.8.3"
   }
