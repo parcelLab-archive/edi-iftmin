@@ -1,0 +1,33 @@
+{
+  "name": "edi-iftmin",
+  "version": "1.0.0",
+  "description": "Parsing EDI IFTMIN messages properly. Yes, EDI. You're welcome.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parcelLab/edi-iftmin.git"
+  },
+  "keywords": [
+    "edi",
+    "iftmin",
+    "sap",
+    "erp",
+    "import",
+    "parse",
+    "nodejs",
+    "enterprise"
+  ],
+  "author": "Julian Krenge, Oscar Reyes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/parcelLab/edi-iftmin/issues"
+  },
+  "homepage": "https://github.com/parcelLab/edi-iftmin#readme",
+  "devDependencies": {
+    "js-yaml": "^3.5.5",
+    "underscore": "^1.8.3"
+  }
+}

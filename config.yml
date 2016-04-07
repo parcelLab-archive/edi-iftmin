@@ -1,0 +1,65 @@
+UNH:
+  name: Message header
+  elements:
+    '010': Message reference number
+BGM:
+  name: Beginning of message
+  elements:
+    '010': Document/message name
+RFF:
+  name: Reference
+  nesting:
+    nest: '010:0'
+    IV: Invoice number
+    IL: Invoice line number
+    AAD: Contract addendum number
+    SRN: Shipment reference number
+    CN: Carrier's reference number
+    AFD: Customs item number
+    CU: Consignor's reference number
+    ACD: Additional reference number
+    ADE: Account number
+  elements:
+    '010':
+      name: Reference
+      elements:
+        '0': Reference code qualifier
+        '1': Reference identifier
+NAD:
+  name: Name and address
+  nesting:
+    nest: '010'
+    OS: Original shipper
+    CN: Consignee
+    EX: Exporter
+  elements:
+    '010': Party Function Code Qualifier
+    '020': Party identification details
+    '030': Name and address
+    '040': Party name
+    '050': Street
+    '060': City name
+    '070': Country sub-entity details
+    '080': Postal identification code
+    '090': Country name code
+LOC:
+  name: Place/location identification
+  nesting:
+      nest: '010'
+      '10': Place of acceptance
+      '19': Factory/plant
+  elements:
+    '010': Location function code qualifier
+    '020': Location identification
+    '030': Related location one identification
+GID:
+  name: Goods item details
+  elements:
+    '010': Goods item number
+    '020': Number and type of packages
+PIA:
+  name: Additional product id
+PCI:
+  name: Package identification
+GIN:
+  name: Goods identity number
