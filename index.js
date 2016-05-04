@@ -4,7 +4,7 @@ var fs = require('fs');
 
 // Get document, or throw exception on error
 try {
-  var _c = yaml.safeLoad(fs.readFileSync('./config.yml', 'utf8'));
+  var _c = yaml.safeLoad(fs.readFileSync(__dirname + '/config.yml', 'utf8'));
 } catch (e) {
   throw e;
 }
