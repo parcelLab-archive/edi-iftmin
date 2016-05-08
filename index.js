@@ -229,23 +229,27 @@ function parseEdi(edi) {
 
       // read the list
       var listItems = [];
-      for (var l = 0; l < _this.list.length; l++) {
-        var listMessageSegments = splitIntoSegments(_this.list[l]);
-        var parsedListElement = {};
+      if (!_.isNull(_this.list)) {
+        for (var l = 0; l < _this.list.length; l++) {
+          var listMessageSegments = splitIntoSegments(_this.list[l]);
+          var parsedListElement = {};
 
-        for (var m = 0; m < listMessageSegments.length; m++) {
-          var parsed2 = parseMessageSegment(listMessageSegments[m]);
-          if (!_.isNull(parsed2)) parsedListElement[parsed2.code] = parsed2.message;
-          else resultMessage.unknown.push(listMessageSegments[m]);
+          for (var m = 0; m < listMessageSegments.length; m++) {
+            var parsed2 = parseMessageSegment(listMessageSegments[m]);
+            if (!_.isNull(parsed2)) parsedListElement[parsed2.code] = parsed2.message;
+            else resultMessage.unknown.push(listMessageSegments[m]);
+          }
+
+          listItems.push(parsedListElement);
         }
-
-        listItems.push(parsedListElement);
       }
 
       // multiply the rest of the message with the list to break down into single complete records
-      for (var n = 0; n < listItems.length; n++) {
-        result.push(_.extend(clone(resultMessage), listItems[n]));
-      }
+      if (!_.isNull(_this.list)) {
+        for (var n = 0; n < listItems.length; n++) {
+          result.push(_.extend(clone(resultMessage), listItems[n]));
+        }
+      } else result.push(resultMessage);
 
     }
 

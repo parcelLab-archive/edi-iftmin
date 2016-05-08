@@ -10,7 +10,7 @@ This is how you parse EDI files:
 var ediParser = require('edi-iftmin');
 
 // first load the raw EDI file into memory
-var rawEdi = fs.readFileSync('./some-edi-file');
+var rawEdi = fs.readFileSync('./some-edi-file', 'utf8');
 
 // this parses the raw EDI message and creates a nice JSON object for you to use
 var edi = ediParser.parseEdi(rawEdi);
