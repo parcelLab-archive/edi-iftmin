@@ -1,6 +1,6 @@
 {
   "name": "edi-iftmin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Parsing EDI IFTMIN messages properly. Yes, EDI. You're welcome.",
   "main": "index.js",
   "scripts": {
