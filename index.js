@@ -56,10 +56,12 @@ function splitIntoMessages(batch) {
 }
 
 function splitIntoSegments(message) {
-  return message.split('\'');
+  message = message.replace(/(\?)'/g, '#MARK#').replace(/'/g, '#SPLIT#').replace(/#MARK#/g, '\'');
+  return message.split('#SPLIT#');
 }
 
 function splitIntoDataElements(message) {
+  // FIXME: Check if this removing of single quotes is necessary
   return message.replace(/\'/g, '').split('+');
 }
 
