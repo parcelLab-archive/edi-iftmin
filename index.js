@@ -264,10 +264,7 @@ function parseEdi(edi) {
 function inspectEdi(edi) {
   var json = parseEdi(edi);
 
-  console.log(json);
-
   for (var i = 0; i < json.length; i++) {
-    console.log('Message ' + i);
     var segments = _.keys(json[i]);
 
     for (var j = 0; j < segments.length; j++) {
