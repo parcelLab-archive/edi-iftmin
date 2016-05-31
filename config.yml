@@ -63,3 +63,12 @@ PCI:
   name: Package identification
 GIN:
   name: Goods identity number
+TDT:
+  name: Transport information
+  nesting:
+    nest: '010'
+    '20': Main-carriage transport
+  elements:
+    '010': Transport stage code qualifier
+    '020': Means of transport journey identifier
+    '030': Mode of transport
