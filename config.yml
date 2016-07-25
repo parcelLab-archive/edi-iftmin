@@ -19,6 +19,10 @@ RFF:
     CU: Consignor's reference number
     ACD: Additional reference number
     ADE: Account number
+    AFC: Bordereau number
+    AFB: Cargo manifest number
+    UCN: Unique consignment reference number
+    AAS: Transport document number
   elements:
     '010':
       name: Reference
@@ -72,3 +76,24 @@ TDT:
     '010': Transport stage code qualifier
     '020': Means of transport journey identifier
     '030': Mode of transport
+STS:
+  name: Status
+  nesting:
+    nest: '010'
+    'F02': DB Schenker Status
+  elements:
+    '010': Status event
+    '020': Status reason
+FTX:
+  name: Free text
+  elements:
+    '020': Free text function code
+    '030': Text reference
+    '040': Text literal
+DTM:
+  name: Date/ Time/ Period
+  nesting:
+    nest: '010:0'
+    '17': Delivery date/ time, estimated
+    '137': Document/ message date/ time
+    '334': Status change date/ time
