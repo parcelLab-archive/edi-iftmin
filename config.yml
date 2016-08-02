@@ -78,9 +78,6 @@ TDT:
     '030': Mode of transport
 STS:
   name: Status
-  nesting:
-    nest: '010'
-    'F02': DB Schenker Status
   elements:
     '010': Status event
     '020': Status reason
