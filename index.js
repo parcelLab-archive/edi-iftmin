@@ -30,6 +30,19 @@ function select(object, selector) {
   return obj;
 }
 
+function insert(object, selector, value) {
+  var path = selector.split('.');
+  var obj = object;
+  for (var i = 0; i < path.length; i++) {
+    if (!_.has(obj, path[i]) && i < path.length - 1) {
+      obj[path[i]] = {};
+      obj = obj[path[i]];
+    } else if (!_.has(obj, path[i]) && i === path.length - 1) obj[path[i]] = value;
+    else if (_.has(obj, path[i]) && i === path.length - 1) obj[path[i]] = value;
+    else if (_.has(obj, path[i]) && i < path.length - 1) obj = obj[path[i]];
+  }
+}
+
 function printWithIndent(indent, string) {
   var indentation = '';
   for (var i = 0; i < indent; i++) {
@@ -198,6 +211,46 @@ function inspectNode(name, node, indent) {
 
 }
 
+function mergeComponents(parsed, resultMessage) {  
+  var message = parsed.message;
+  var notAMergeKeys = ['name', 'raw', 'value', 'message'];
+  var result = null;
+  _.keys(message).forEach(function (key) {
+    if (notAMergeKeys.indexOf(key) !== -1) return;
+
+    var idCode = _.keys(resultMessage).filter(function (resultKey) {
+      return resultKey === key;
+    })[0];
+
+    if (!idCode) result = parsed.message;
+    else {
+      _.keys(message[key]).forEach(function (firstLevelKey) {
+        if (notAMergeKeys.indexOf(firstLevelKey) !== -1) return;
+        else {
+          _.keys(message[key][firstLevelKey]).forEach(function (secondLevelKey) {
+            if (notAMergeKeys.indexOf(secondLevelKey) !== -1) return;
+            else {
+              var path = [key, firstLevelKey, secondLevelKey].join('.');
+              var oldValue = select(resultMessage, path).value;
+              var newValue = select(message, path).value;
+
+              if (Array.isArray(oldValue))
+                oldValue.push(newValue);
+              else if (oldValue !== newValue)
+                oldValue = [oldValue, newValue];
+
+              insert(resultMessage, path + '.value', oldValue);
+            }
+          });
+        }
+      });
+      result = resultMessage;
+      result.hey = true;
+    }
+  });
+  return result;
+}
+
 //////////////
 // External //
 //////////////
@@ -223,7 +276,9 @@ function parseEdi(edi) {
         var parsed = parseMessageSegment(messageSegments[k]);
         if (!_.isNull(parsed)) {
           if (_.has(resultMessage, parsed.code)) {
-            resultMessage[parsed.code] = _.extend(resultMessage[parsed.code], parsed.message);
+            // merge components when there's more than one with the same segment, i.e. RFF:CW twice.
+            var mergedResult = mergeComponents(parsed, resultMessage[parsed.code]);
+            _.extend(resultMessage[parsed.code], mergedResult);
           } else resultMessage[parsed.code] = parsed.message;
         } else resultMessage.unknown.push(messageSegments[k]);
 
