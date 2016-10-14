@@ -94,3 +94,8 @@ DTM:
     '17': Delivery date/ time, estimated
     '137': Document/ message date/ time
     '334': Status change date/ time
+CNI:
+  name: Consigment information
+  elements:
+    '010': Consolidation item number
+    '020': Document/ status details

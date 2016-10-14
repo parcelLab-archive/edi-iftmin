@@ -1,6 +1,8 @@
-# EDI IFTMIN
+# EDI IFTMIN and IFTSTA
 
-So that's basically this specification here: [UN/EDIFACT IFTMIN](http://www.unece.org/trade/untdid/d03a/trmd/iftmin_c.htm).
+So that's basically these specifications here:
+[UN/EDIFACT IFTMIN](http://www.unece.org/trade/untdid/d03a/trmd/iftmin_c.htm) and
+[UN/EDIFACT IFTSTA](http://www.unece.org/trade/untdid/d04b/trmd/iftsta_c.htm).
 
 ## How to use
 
