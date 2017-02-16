@@ -23,6 +23,7 @@ RFF:
     AFB: Cargo manifest number
     UCN: Unique consignment reference number
     AAS: Transport document number
+    FF: Freight forwarder's reference number
   elements:
     '010':
       name: Reference
