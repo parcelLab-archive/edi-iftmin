@@ -256,6 +256,8 @@ function mergeComponents(parsed, resultMessage) {
 //////////////
 
 function parseEdi(edi) {
+  if (!_.isString(edi)) return null;
+  else edi = edi.replace(/(\n|\r|\r\n)/gi, '');
 
   var result = [];
 
