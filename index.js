@@ -233,9 +233,6 @@ function mergeComponents(parsed, resultMessage) {
             else {
               var path = [key, firstLevelKey, secondLevelKey].join('.');
 
-              console.log(JSON.stringify(resultMessage, ' ', 2));
-              console.log(JSON.stringify(path, ' ', 2));
-
               var sel = select(resultMessage, path);
               var oldValue = sel && _.has(sel, 'value') ? sel.value : null;
               if (oldValue) {
