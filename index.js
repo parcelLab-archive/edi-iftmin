@@ -211,7 +211,7 @@ function inspectNode(name, node, indent) {
 
 }
 
-function mergeComponents(parsed, resultMessage) {  
+function mergeComponents(parsed, resultMessage) {
   var message = parsed.message;
   var notAMergeKeys = ['name', 'raw', 'value', 'message'];
   var result = null;
@@ -228,24 +228,29 @@ function mergeComponents(parsed, resultMessage) {
         if (notAMergeKeys.indexOf(firstLevelKey) !== -1) return;
         else {
           _.keys(message[key][firstLevelKey]).forEach(function (secondLevelKey) {
+
             if (notAMergeKeys.indexOf(secondLevelKey) !== -1) return;
             else {
               var path = [key, firstLevelKey, secondLevelKey].join('.');
-              var oldValue = select(resultMessage, path).value;
-              var newValue = select(message, path).value;
 
-              if (Array.isArray(oldValue))
-                oldValue.push(newValue);
-              else if (oldValue !== newValue)
-                oldValue = [oldValue, newValue];
+              console.log(JSON.stringify(resultMessage, ' ', 2));
+              console.log(JSON.stringify(path, ' ', 2));
 
-              insert(resultMessage, path + '.value', oldValue);
+              var sel = select(resultMessage, path);
+              var oldValue = sel && _.has(sel, 'value') ? sel.value : null;
+              if (oldValue) {
+                var newValue = select(message, path).value;
+
+                if (Array.isArray(oldValue)) oldValue.push(newValue);
+                else if (oldValue !== newValue) oldValue = [oldValue, newValue];
+
+                insert(resultMessage, path + '.value', oldValue);
+              }
             }
           });
         }
       });
       result = resultMessage;
-      result.hey = true;
     }
   });
   return result;

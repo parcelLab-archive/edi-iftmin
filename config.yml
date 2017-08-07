@@ -34,9 +34,12 @@ NAD:
   name: Name and address
   nesting:
     nest: '010'
-    OS: Original shipper
+    AP: Accepting party
     CN: Consignee
+    CS: Consolidator
+    DC: Deconsolidator
     EX: Exporter
+    OS: Original shipper
   elements:
     '010': Party Function Code Qualifier
     '020': Party identification details
