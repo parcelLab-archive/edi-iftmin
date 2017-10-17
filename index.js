@@ -83,7 +83,7 @@ function splitIntoDataElements(message) {
 ////////////////////////
 
 function splitListAndRestOfMessage(message) {
-  var listRegEx = /(GID\+.*?\')(?=GID\+.*?\'|UNT\+.*?\')/g;
+  var listRegEx = /((GID|CNI)\+.*?\')(?=(GID|CNI)\+.*?\'|UNT\+.*?\')/g;
   var list = message.match(listRegEx);
   var restOfMessage = message.replace(listRegEx, '');
   return {
