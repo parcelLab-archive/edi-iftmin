@@ -24,7 +24,7 @@ Then you can inspect it to see what information is in there.
 ediParser.inspectEdi(edi);
 ```
 
-*Quick sidenote*: You can drop files you want to inspect in `test/testfile` and run `cd test && node test.js` to use our prepared inspector.
+*Quick sidenote*: You can drop files you want to inspect in `inspect/files` and run `cd inspect && node .` to use our prepared inspector.
 
 This will print a structure of the EDI file to your console showing all messages, e.g. like this:
 
