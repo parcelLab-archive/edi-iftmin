@@ -273,11 +273,13 @@ function parseEdi (edi) {
         for (var l = 0; l < _this.list.length; l++) {
           var listMessageSegments = splitIntoSegments(_this.list[l])
           var parsedListElement = {}
-
           for (var m = 0; m < listMessageSegments.length; m++) {
             var parsed2 = parseMessageSegment(listMessageSegments[m])
-            if (!_.isNull(parsed2)) parsedListElement[parsed2.code] = parsed2.message
-            else resultMessage.unknown.push(listMessageSegments[m])
+            if (!_.isNull(parsed2)) {
+              var old = parsedListElement[parsed2.code]
+              if (old) parsedListElement[parsed2.code] = Object.assign({}, old, parsed2.message)
+              else parsedListElement[parsed2.code] = parsed2.message
+            } else resultMessage.unknown.push(listMessageSegments[m])
           }
 
           listItems.push(parsedListElement)
